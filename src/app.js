@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-const Note = require('./model/notes.model');
+const Note = require('./models/notes.model');
 app.use(express.json());    
 
 
-app.post('/notes', async (req, res) => {
+app.post('/notess', async (req, res) => {
   const { title, description } = req.body;
   const notes = await Note.create({ title, description })
   res.status(201).json({
@@ -12,5 +12,30 @@ app.post('/notes', async (req, res) => {
     Message : "Note created successfully"
     });
 });
+
+app.get('/notess', async (req, res) => {
+  const notes = await Note.find();
+  res.status(200).json({  
+    notes,
+    Message : "Notes fetched successfully"
+  });
+})
+
+app.delete('/notess/:id', async (req, res) => {
+    const id = req.params.id;
+    await Note.findByIdAndDelete(id);
+    res.status(200).json({
+      Message : "Note deleted successfully"
+    });x``
+})
+
+app.patch('/notes/:id', async (req, res) => {
+    const id = req.params.id;
+    const {description } = req.body;
+    await Note.findByIdAndUpdate(id, {description})
+    res.status(200).json({
+      Message : "Note updated successfully"
+    })
+})
 
 module.exports = app;

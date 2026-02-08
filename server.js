@@ -1,4 +1,6 @@
+require('dotenv').config();
 const app = require('./src/app');
+
 const mongoose = require('mongoose');
 const connectToDatabase = require('./src/config/database');
 
