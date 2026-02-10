@@ -41,6 +41,25 @@ const App = () => {
           <div className="note" key={idx}>
             <h3>{elem.title}</h3>
             <p>{elem.description}</p>
+            <button onClick={() => {
+              axios.delete(`https://day14.onrender.com/notess/${elem._id}`)
+                .then(() => {
+                  fetchNotes()
+                })
+            }}>Delete</button>
+            <button onClick={() => {
+              const updatedTitle = prompt("Enter updated title:", elem.title)
+              const updatedDescription = prompt("Enter updated description:", elem.description)
+              if (updatedTitle && updatedDescription) {
+                axios.patch(`https://day14.onrender.com/notess/${elem._id}`, {
+                  title: updatedTitle,
+                  description: updatedDescription
+                })
+                .then(() => {
+                  fetchNotes()
+                })
+              }
+            }}>Update</button>
           </div>
         )
       })}
