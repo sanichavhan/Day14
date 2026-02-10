@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const Note = require('./models/notes.model');
 app.use(express.json());    
-
+app.use(cors());
+app.use(express.static('./public'));
 
 app.post('/notess', async (req, res) => {
   const { title, description } = req.body;
