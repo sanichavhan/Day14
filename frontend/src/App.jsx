@@ -3,7 +3,7 @@ import axios from 'axios'
 const App = () => {
   const [notes, setNotes] = useState([])
   function fetchNotes() {
-    axios.get('http://localhost:3000/notess')
+    axios.get('https://day14.onrender.com/notess')
     .then((response) => {
       setNotes(response.data.notes)
     })
@@ -20,7 +20,7 @@ const App = () => {
     e.preventDefault()
     const {title, description} = e.target.elements;
     console.log(title.value, description.value)
-    axios.post('http://localhost:3000/notess',{
+    axios.post('https://day14.onrender.com/notess',{
       title:title.value, description:description.value})
       .then((response) => {
         console.log('Note created successfully:', response.data)
